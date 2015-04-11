@@ -31,34 +31,23 @@ class Database:
         except Exception as e:
                  logging.error('Database updatePerson operation failed: %s' % e)
 
-    def getPerson(self,id_):
+    def getObject(self, name, id_):
         try:
             id_ = ObjectId(id_)
-            return self._connection[self._dbName]['people'].find_one({'_id':id_})
+            return self._connection[self._dbName][name].find_one({'_id':id_})
         except Exception as e:
-            logging.error('Database getPerson() operation failed: %s' % e)
+            logging.error('Database get %s operation failed: %s' % (name, e))
             return None
-
-    def getPeople(self):
-        return self.getObjects('people')
-
-    def getVolunteers(self):
-        return self.getObjects('volunteers')
+    
+    def getEvent(self, id):
+        return self.getObject('events', id)
 
     def addObject(self, name, data):
         try:
             collection = self._connection[self._dbName][name]
-            new_person = {}
-
-            for key,value in data.items():
-                new_person[key] = value
-            
-            return collection.insert(new_person)
+            return collection.insert_one(data)
         except Exception as e:
             logging.error('Database add %s operation failed: %s' % (name,e))
         
-    def addPerson(self, data):
-        return self.addObject('people',data)
-
-    def addVolunteer(self, data):
-        return self.addObject('volunteers',data)
+    def addEvent(self, data):
+        return self.addObject('events',data)

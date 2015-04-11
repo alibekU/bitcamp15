@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Events{% endblock %}
+{% block content %}
+<div id="content">
+	<h3>Events near you: </h3>      
+	{% for event in events %}
+		<ul>
+			<li>{{ event['name']|e }}:{{ event['description']|e }}</li>
+		</ul>
+	{% endfor %}
+</div>
+{% endblock %}
