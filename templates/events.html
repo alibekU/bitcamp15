@@ -2,11 +2,42 @@
 {% block title %}Events{% endblock %}
 {% block content %}
 <div id="content">
-	<h3>Events near you: </h3>      
-	{% for event in events %}
-		<ul>
-			<li>{{ event['name']|e }}:{{ event['description']|e }}</li>
-		</ul>
-	{% endfor %}
+	<h3>Events near {{city|e}}, {{region|e}}: </h3>      
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					{% for field in fields %}
+					<th>{{field}}</th>
+					{% endfor %}
+					<th>expires in</th> 
+					<th>categories</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for event in events %}
+				{% if event['expires'] >= time %} 
+					<tr class="success">
+						{% for field in fields %}
+							<td>
+								{% if event[field] is defined %}
+									{{ event[field]|e }}
+								{% endif %}
+							</td>
+						{% endfor %}
+						<td>
+							less than {{ (event['expires'] - time)//3600 +1 }} h
+						</td>
+						<td>
+							{% for val in event['categories'] %}
+								{{ val }}&nbsp;
+							{% endfor %}
+						</td>
+					</tr>
+				{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 {% endblock %}
