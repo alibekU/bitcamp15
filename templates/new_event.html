@@ -34,7 +34,14 @@
 			<label>Please pick an approximate (20 mi) location of the activity.</label>
 			<div id="map-canvas" style="width:70%; height:50%"></div>
 		</div>
-		<input type="submit" class="btn btn-info" value ="Add" />
+		{% if handle is not defined or handle == '' %}
+			<script>
+				function myFunction() {
+	    				document.getElementById("submit").disabled = true;
+				}
+			</script>
+			<p> Please <a href="{{url_for('login')}}">log in </a> with Twitter to submit a new activity </p>
+		<input type="submit" class="btn btn-info" id="submit" value ="Add" />
 	</form>
 </div>
 {% endblock %}
