@@ -22,8 +22,12 @@
 		    		</div>
 				<div>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="{{ url_for('login') }}">Login</a></li>
-						<li><a href="{{ url_for('logout') }}">Logout</a></li>
+						{% if handle != 'None' %}
+							<li><a href="{{ url_for('login') }}">Login</a></li>
+						{% else %}
+							<li><a>Hi there, @{{handle}}</a></li>
+							<li><a href="{{ url_for('logout') }}">Logout</a></li>
+						{% endif %}
 					</ul>
 				</div>
 		  	</div>
