@@ -23,7 +23,6 @@ categories = ['food', 'sports', 'entertainment', 'outdoors', 'stydying']
 textFields = ['name','description','expires', 'lat', 'lng']
 otherFields = ['categories']
 app.secret_key = 'blalga'
-"""
 app.config['OAUTH_CREDENTIALS'] = {
     'facebook': {
         'id': '470154729788964',
@@ -34,7 +33,6 @@ app.config['OAUTH_CREDENTIALS'] = {
         'secret': '07eFc6FkuWT8EN259NMLrkDc13N5wC8ZkVomQDxWWdERGKDcSd'
     }
 }
-"""
 oauth = OAuth()
 twitter = oauth.remote_app('twitter',
     base_url='https://api.twitter.com/1/',
@@ -168,7 +166,7 @@ def add_event():
                 flash('Please allow browser to use your location and choose an approximate placefor the activity')
             else:
                 flash('Field {} is empty. Please fill out all the fields'.format(name))
-            return redirect(url_for('new_event'), handle = handle)
+            return redirect(url_for('new_event', handle = handle))
     input['expires'] = 3600*int(input['expires']) + input['added']
     
     #ip_address = request.access_route[0] or request.remote_addr
@@ -182,7 +180,7 @@ def add_event():
     #input['long'] = geodata['longitude']
     input['categories'] = request.form.getlist('categories')
     db.addEvent(input)
-    return redirect(url_for('events'), handle = handle)
+    return redirect(url_for('events',handle = handle))
 
 @app.route('/event/<id>')
 def event(id):
@@ -196,7 +194,7 @@ def event(id):
         return render_template('event.html',event=event, handle = handle)
     else:
         flash("User with id={} does not exit".format(id))
-        return redirect(url_for('events'), handle = handle)
+        return redirect(url_for('events', handle = handle))
 
 if __name__ == "__main__":
     app.run()
