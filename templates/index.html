@@ -1,4 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Wanna Join Me?{% endblock %}
 {% block content %}
+	<div id="content">
+		{% if current_user.is_authenticated() %}
+			Hello, {{ current_user.nickname|e }}
+		{% endif %}
+	</div>
 {% endblock %}

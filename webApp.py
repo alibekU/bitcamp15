@@ -71,7 +71,7 @@ def oauth_callback(provider):
         return redirect(url_for('index'))
     user = db.getUserBySocialId(social_id)
     if not user:
-        user = User(social_id=social_id, nickname=username)
+        user = User(social_id=social_id, nickname=username, is_active=True, is_authenticated=True)
         user._id = db.addUser(user)
     login_user(user, True)
     return redirect(url_for('index'))
