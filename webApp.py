@@ -41,8 +41,8 @@ twitter = oauth.remote_app('twitter',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',
     authorize_url='https://api.twitter.com/oauth/authenticate',
-    consumer_key='rsyuGK2NWX8npig5hHM4SrGo5',
-    consumer_secret='7DoTg9SPRApbg5iRNKG5RDNQo6FRdgr28rmMi7OToDVXcF9bMP'
+    consumer_key='08fsYxhlDtt5KoMR844zjb4oj',
+    consumer_secret='07eFc6FkuWT8EN259NMLrkDc13N5wC8ZkVomQDxWWdERGKDcSd'
 )
 distance = 40
 @twitter.tokengetter
