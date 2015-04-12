@@ -62,7 +62,7 @@ def index():
 def login():
     return redirect(url_for('oauth_authorize', provider='twitter'))
 """
-@app.route('/login')
+@app.route('/login/')
 def login():
     return twitter.authorize(callback=url_for('oauth_authorized',
         next=request.args.get('next') or request.referrer or None))
