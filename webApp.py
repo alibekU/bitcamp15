@@ -134,6 +134,18 @@ def add_event():
     db.addEvent(input)
     return redirect(url_for('events', handle = handle))
 
+@app.route('/voted/<person>/<eventId>')
+def voted(person, eventId):
+    res = db.addVote(person, eventId)
+    if res == 0:
+        flash("An error occured, we apologize for the inconvenience")
+    elif res == -1:
+        flash("You already voted for this event.")
+    else:
+        flash("Thank you, you vote has been processed")
+    return redirect(url_for('event',id=eventId))
+
+
 @app.route('/event/<id>')
 def event(id):
     if 'twitter_user' in session:
@@ -142,7 +154,7 @@ def event(id):
         handle = ''
     event = db.getEvent(id)
     if event:
-        return render_template('event.html',event=event, handle = handle)
+        return render_template('event.html',event=event, handle = handle, time=time.time())
     else:
         flash("User with id={} does not exit".format(id))
         return redirect(url_for('events', handle = handle))

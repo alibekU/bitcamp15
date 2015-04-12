@@ -6,7 +6,14 @@
 		{% set location=(event['lat'],event['lng']) %}
 		{% set style="width:70%;height:50%;" %}
 
-		<h3>{{event['name']}}</h3>
+		<a style="float:right" 
+			{% if handle is defined and handle != '' %} 
+				href="{{url_for('voted',person=handle,eventId=event['_id'])}}" 
+			{% else %}
+				href=""
+			{% endif %}
+			class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span>Join</a>
+		<h2>{{event['name']}}</h2>
 		<p>{{event['description']}}</p>
 		<br/>
 		<h4>Categories:</h4>
@@ -23,6 +30,18 @@
         		markers=[location,],
 			style = style)
 		}}
+		<br/>
+		<h4>Want to join</h4>
+		<p>{{event['count']}} 
+			{% if event['count'] == 1 %} 
+				person 
+			{% else %} 
+				people
+			{% endif %}
+		</p>
+		<br/>
+		<h4>Expires in:</h4>
+		<p>{{((event['expires'] - time)//3600 +1)|int}} h</p>
 	{% endwith %}
 	</div>
 {% endblock %}

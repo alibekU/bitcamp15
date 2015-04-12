@@ -30,6 +30,16 @@ class Database:
             )
         except Exception as e:
                  logging.error('Database updatePerson operation failed: %s' % e)
+    
+    def updateEvent(self,data):
+        try:
+            self._connection[self._dbName]['events'].update(
+                    {"_id": data.get('_id')},
+                    data,
+                    upsert=False
+            )
+        except Exception as e:
+            logging.error('Database updateEvent operation failed: %s' % e)
 
     def getObject(self, name, field, id_):
         try:
@@ -77,6 +87,23 @@ class Database:
             return User(**obj)
         else: 
             return None
+
+    def addVote(self,handle,id):
+        event = self.getEvent(id)
+        if event == None:
+            return 0
+        else:
+            if 'handles' in event:
+                if handle in event['handles']:
+                    return -1
+                event['handles'].append(handle)
+            else:
+                event['handles'] = [handle]
+            
+            event['count'] += 1
+            self.updateEvent(event)
+            return 1
+
 
     def removeEvent(self, id):
         id = ObjectId(id)
