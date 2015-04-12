@@ -28,6 +28,12 @@
 				{{cat|e}}<br>
 			{% endfor %}
 		</div>
+		<input id="latbox" type="hidden" name="lat"/>
+		<input id="lngbox" type="hidden" name="lng"/>
+		<div class="form-group">
+			<label>Please pick an approximate (20 mi) location of the activity.</label>
+			<div id="map-canvas" style="width:70%; height:50%"></div>
+		</div>
 		<input type="submit" class="btn btn-info" value ="Add" />
 	</form>
 </div>
