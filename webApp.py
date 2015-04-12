@@ -30,8 +30,8 @@ app.config['OAUTH_CREDENTIALS'] = {
         'secret': '010cc08bd4f51e34f3f3e684fbdea8a7'
     },
     'twitter': {
-        'id': 'rsyuGK2NWX8npig5hHM4SrGo5',
-        'secret': '7DoTg9SPRApbg5iRNKG5RDNQo6FRdgr28rmMi7OToDVXcF9bMP'
+        'id': '08fsYxhlDtt5KoMR844zjb4oj',
+        'secret': '07eFc6FkuWT8EN259NMLrkDc13N5wC8ZkVomQDxWWdERGKDcSd'
     }
 }
 """
