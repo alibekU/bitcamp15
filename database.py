@@ -1,28 +1,10 @@
 from bson.objectid import ObjectId
 import pymongo
 import logging
-from flask.ext.login import LoginManager, UserMixin, login_user, logout_user,current_user
-
-class User(UserMixin):
-    def __init__(self, **entries): 
-        self.__dict__.update(entries)
-    
-    def get_id(self):
-        return self.social_id
-   
-    def is_authenticated(self):
-        return self.authenticated
- 
-    def is_active(self):
-        return True
- 
-    def is_anonymous(self):
-        return False
 
 class Database:
     logging.basicConfig(filename='web.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-    
     def __init__(self, dbName):
         self._dbName = dbName
         self._connection = None

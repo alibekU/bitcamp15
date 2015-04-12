@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}{{event['name']|e}}{% endblock %}
+{% block content %}
+	<div id = "content">
+	{% with %}
+		{% set location=(event['lat'],event['lng']) %}
+		{% set style="width:70%;height:50%;" %}
+
+		<h3>{{event['name']}}</h3>
+		<p>{{event['description']}}</p>
+		<br/>
+		<h4>Categories:</h4>
+		<p>
+			{% for cat in event['categories'] %}
+				{{cat}}
+			{% endfor %}
+		</p>
+		<br/>
+		<h4>Location</h4>
+		{{googlemap(
+        		"simple-map",
+        		location.0, location.1,
+        		markers=[location,],
+			style = style)
+		}}
+	{% endwith %}
+	</div>
+{% endblock %}

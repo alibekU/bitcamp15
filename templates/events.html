@@ -12,6 +12,7 @@
 					{% endfor %}
 					<th>expires in</th> 
 					<th>categories</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,6 +33,7 @@
 								{{ val }}&nbsp;
 							{% endfor %}
 						</td>
+						<td><a href="{{url_for('event',id=event['_id'])}}">Click for details</a></td>
 					</tr>
 				{% endfor %}
 			</tbody>

@@ -22,7 +22,7 @@
 		    		</div>
 				<div>
 					<ul class="nav navbar-nav navbar-right">
-						{% if handle != 'None' %}
+						{% if handle is not defined or handle == ''%}
 							<li><a href="{{ url_for('login') }}">Login</a></li>
 						{% else %}
 							<li><a>Hi there, @{{handle}}</a></li>
